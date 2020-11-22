@@ -1,26 +1,36 @@
+
 import numpy as np
 import random
-def roll(die, sides,dierolls):  # Define roll function
-    r = 0  # Start r at 0 
+def Diceroll (NUM_ROLLS,DIE_SIDES):
+    NUM_ROLLS = 1000
+    DIE_SIDES = 12
+# Create the dictionary to store the results of each roll of the die.
+rolls = {}
+#Loop for rolling the die NUM_ROLLS times
+for r in range (100):
+    roll_result = random.randint(1, 13)
+    if roll_result in rolls:
+        # Add to the count for this number.
+        rolls[roll_result] += 1
+    else:
+        # Record the first roll result for this number.
+        rolls[roll_result] = 1
 
-    while r < die:  # Start While loop to roll based on number of dice selected
-        rolls = random.randint(1,sides)  # Store random roll to variable rolls
-        r += 1  # Increase by 1 each loop through until loop validates false
-        print(np.sum(sides))  # Print out the rolls for each die selected
+# Print how many times each number was rolled
+for roll_result in range(1, 13):
+    print("The number", str(roll_result), "was rolled", str(rolls[roll_result]), "times.")
+
+#How many times the 3 was rolled
+print("The number three was rolled", str(rolls[3]), "times.")
+
+#Total roll between all of them
+sum = 0
+for roll_result in rolls:
+    sum += roll_result * rolls[roll_result]
+
+print("The total roll result was", str(sum))
 
 
-def main():  # Define main function/program
-    rolling = True  # set variable to test True for initial loop
-    while rolling:  # start while loop while condition evaluates True
-        answer = input("Ready to roll? Y or N: ")  # Receive answer to begin program
-        if answer.lower() == "y":  # If user says yes, run program
-            die = eval(input("Please enter the amount of dice you wish to roll: "))  # create variable for amount of die
-            sides = eval(input("Please enter the number of sides on your dice: "))  # create variable for sides
-            dierolls = eval(input("Please enter the number of dierolls:"))
-            roll(die,sides,dierolls)  # Pass user input variables to roll function
-        else:  # If user selected anything other than Y or y
-            print("Thank you for playing!")  # Print Thank you
-            break  # End while loop/program
 
 
-main()  # Call main function/program upon importing
+    
